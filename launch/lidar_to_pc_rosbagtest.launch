@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="lidarproject" type="laser_to_merged_pc"
+      name="laser_to_merged_pc_node">
+  </node>
+</launch>

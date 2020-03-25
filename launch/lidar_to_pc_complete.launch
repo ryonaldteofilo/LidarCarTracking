@@ -1,0 +1,28 @@
+<launch>
+  <!-- tf publishers for both lidar scan topics --> 	
+  <node pkg="tf" type="static_transform_publisher" name="lidar1_tf_broadcaster"
+      args="0.0 -0.64 0.0 0.0 0.0 0.0 1.0 map laser1 100" />
+  <node pkg="tf" type="static_transform_publisher" name="lidar2_tf_broadcaster"
+      args="0.0 0.64 0.0 0.0 0.0 0.0 1.0 map laser2 100" />
+
+
+  <!-- laser filter nodes -->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+      name="lidar1_filter">
+    <rosparam command="load" file="$(find lidarproject)/launch/lidar_config.yaml" />
+    <remap from="scan" to="lidar1/scan" />
+    <remap from="scan_filtered" to="lidar1_filtered" />
+  </node>
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+      name="lidar2_filter">
+    <rosparam command="load" file="$(find lidarproject)/launch/lidar_config.yaml" />
+    <remap from="scan" to="lidar2/scan" />
+    <remap from="scan_filtered" to="lidar2_filtered" />
+  </node>
+
+  <!-- from 2 laserscan to 1 merged pointcloud -->
+  <node pkg="lidarproject" type="laser_to_merged_pc"
+      name="laser_to_merged_pc_node">
+  </node>
+
+</launch>
