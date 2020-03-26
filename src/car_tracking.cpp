@@ -1,4 +1,3 @@
-#include <ros/ros.h>
 #include <iostream>
 #include <string>
 #include <iterator>
@@ -9,6 +8,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/video/video.hpp>
 #include <opencv2/video/tracking.hpp>
+#include <ros/ros.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <geometry_msgs/Point.h>
@@ -23,8 +23,6 @@
 #include <pcl/segmentation/extract_clusters.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
-using namespace std;
-using namespace cv;
 
 std::vector<cv::KalmanFilter> kf_vector{};
 std::vector<int> car_id{};
@@ -103,7 +101,7 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
   for(int i=0; i<input_nokf; i++) // debugging purposes
   {
     std::cout << "kf pred: " << kf_predictions[i].x <<" "
-              << kf_predictions[i].y<<" "<< kf_predictions[i].z <<endl;
+              << kf_predictions[i].y<<" "<< kf_predictions[i].z << std::endl;
   }
 
   // Create markers using kf_predictions positions
@@ -179,7 +177,7 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
   {
     float m_x=input_cc[kf_id[i]].x;
     float m_y=input_cc[kf_id[i]].y;
-    cv::Mat measure_mat=cv::Mat(2,1,CV_32F,Scalar(0));
+    cv::Mat measure_mat=cv::Mat(2,1,CV_32F,cv::Scalar(0));
     measure_mat.at<float>(0)=m_x;
     measure_mat.at<float>(1)=m_y;
     measure_matrices.push_back(measure_mat);
@@ -250,7 +248,7 @@ void object_id(const std::vector<geometry_msgs::Point> &input_cc, const int &inp
     }
     else
     {
-      std::cout << "Element not found" << endl;
+      std::cout << "Element not found" << std::endl;
     }
   }
 }
@@ -304,7 +302,7 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
   {
     int number_of_clusters{static_cast<int>(cluster_indices.size())};
 
-    std::cout<< "number of cluster: " << number_of_clusters << endl;
+    std::cout<< "number of cluster: " << number_of_clusters << std::endl;
 
     std::vector<geometry_msgs::Point> cluster_centers{};
     for(int i=0; i<cluster_centroids.size(); i++)
@@ -349,22 +347,22 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
     for(int i=0; i<number_of_clusters; i++)
     {
       std::cout << "kf state: " << kf_vector[i].statePre.at<float>(0) <<" "
-                << kf_vector[i].statePre.at<float>(1) << endl;
+                << kf_vector[i].statePre.at<float>(1) << std::endl;
     }
 
     // Identifying cars based on initial position
     object_id(cluster_centers, number_of_clusters);
 
-    std::cout << "obj_id: " << endl;
+    std::cout << "obj_id: " << std::endl;
     for(auto it=obj_id.begin(); it!=obj_id.end(); it++)
     {
-      std::cout << *it << endl;
+      std::cout << *it << std::endl;
     }
 
-    std::cout << "car_id: " << endl; // cross check with obj_id
+    std::cout << "car_id: " << std::endl; // cross check with obj_id
     for(auto it=car_id.begin(); it!=car_id.end(); it++)
     {
-      std::cout << *it << endl;
+      std::cout << *it << std::endl;
     }
 
     first_frame=false;
@@ -373,11 +371,11 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
   else
   {
     int number_of_kf{static_cast<int>(kf_vector.size())};
-    std::cout << "Number of kf: " << number_of_kf << endl;
+    std::cout << "Number of kf: " << number_of_kf << std::endl;
 
     if(cluster_indices.size()==number_of_kf)
     {
-      std::cout << "Updating" <<endl;
+      std::cout << "Updating" <<std::endl;
 
       std::vector<geometry_msgs::Point> cluster_centers{};
       for(int i=0; i<cluster_centroids.size(); i++)
@@ -391,7 +389,7 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
       predict_and_correct(cluster_centers, number_of_kf);
     }
 
-    else {std::cout<< "Not updating" <<endl;}
+    else {std::cout<< "Not updating" <<std::endl;}
   }
 }
 

@@ -140,8 +140,8 @@ catkin_package(
 add_executable(laser_to_merged_pc src/laser_to_merged_pc.cpp)
 target_link_libraries(laser_to_merged_pc ${catkin_LIBRARIES})
 
-add_executable(car_tracker src/car_tracker.cpp)
-target_link_libraries(car_tracker ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_executable(car_tracking src/car_tracking.cpp)
+target_link_libraries(car_tracking ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(picars_logic src/picars_logic.cpp)
 target_link_libraries(picars_logic ${catkin_LIBRARIES})
