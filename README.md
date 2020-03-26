@@ -4,7 +4,7 @@ Point cloud object tracking using OpenCV, PCL and ROS
 ## Information
 This project aims to create a robust system to track and identify cars/object. It is made to provide positional data of Connected Autonomous Vehicles/CAVs (modeled by Raspberry-Pi cars made by SunFounder) to enable traffic flow management using Artificial Intelligence.
 
-As shown below, the cars (could be more than 4) are moving around a figure 8 track with one junction to navigate through. Using LIDAR data and ultrasonic sensors, the cars are able to navigate through junction without crashing.
+As shown below, the robot cars are moving around a figure 8 track with one junction to navigate through. Using LIDAR data and ultrasonic sensors, the cars are able to navigate through junction without crashing.
 
 ![4 Cars Demo](https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif)
 
