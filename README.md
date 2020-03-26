@@ -19,6 +19,8 @@ Here a GIF of it working with 6 cars.
 
 ![6 Cars Tracking](https://media.giphy.com/media/XDXWXwmfKUJWz9w4G0/giphy.gif)
 
+(Note: In these demos, the LIDAR data is being streamed wirelessly using a Raspberry Pi. Thus, there will be some inconsistencies during tracking due to some data losses during streaming)
+
 ## How to use
 _It is recommended to read the thesis to understand the functionality of each code before using it_
 
