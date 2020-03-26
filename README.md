@@ -7,7 +7,7 @@ This is a project that aims to create a robust system to track and identify cars
 As shown below, the cars (could be more than 4) are moving around a figure 8 track with one junction to navigate through. Using LIDAR data and ultrasonic sensors, the cars are able to navigate through junction without crashing.
 
 Although ultrasonic sensors might sound sufficient to allow the cars to not crash. The objective of this project is to provide localisation/positional data of the CAVs, which could be used for Deep Reinforcement Learning/DRL to improve efficiency of traffic flow.
-**This may sound like over-engineering. However, with positional data and AI, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars _don't even need to stop anymore_ to navigate through the junction**. This would not only tackle traffic congestion issues (costs billions of dollars around the world), but also energy efficiency problems. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
+**This may sound like over-engineering. However, with positional data and AI, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars _don't need to stop_ to navigate through the junction**. This would not only tackle traffic congestion issues (costs billions of dollars around the world), but also improve energy efficiency. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
 
 Here a GIF of it working with 6 cars.
 
