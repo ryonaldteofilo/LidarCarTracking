@@ -1,5 +1,5 @@
 # LIDAR car tracking
-using OpenCV, PCL and ROS
+Point cloud object tracking using OpenCV, PCL and ROS
 
 ## Information
 This project aims to create a robust system to track and identify cars/object. It is made to provide positional data of Connected Autonomous Vehicles/CAVs (modeled by Raspberry-Pi cars made by SunFounder) to enable traffic flow management using Artificial Intelligence.
@@ -19,7 +19,7 @@ Here a GIF of it working with 6 cars.
 
 ![6 Cars Tracking](https://media.giphy.com/media/XDXWXwmfKUJWz9w4G0/giphy.gif)
 
-(Note: In these demos, the LIDAR data is being streamed wirelessly using a Raspberry Pi. Thus, there will be some inconsistencies during tracking due to some data losses during streaming)
+(Note: The stuttering in rviz is due to occasional packet losses as the point cloud data from the 2 LIDAR sensors are being streamed wirelessly using a Raspberry Pi)
 
 ## How to use
 _It is recommended to read the thesis to understand the functionality of each code before using it_
