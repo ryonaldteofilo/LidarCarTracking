@@ -41,9 +41,9 @@ TBD
 Special thanks to Prof. Robert Piechocki, Ahmed Khalil and Lucia Cipolina-Kun for the supervision throughout this project. 
 
 ## References
-1. Stanford   Artificial   Intelligence   Laboratory   et   al.,   “Robotic   operatingsystem.” [Online]. Available:  https://www.ros.org
+1. Stanford   Artificial   Intelligence   Laboratory   et   al.,   “Robotic   operating system.” [Online]. Available:  https://www.ros.org
 2. R.  B.  Rusu  and  S.  Cousins,  “3D  is  here:   Point  Cloud  Library  (PCL),”inIEEE International Conference on Robotics and Automation (ICRA),Shanghai, China, May 9-13 2011
-3. P.Palanisamy,“praveen-palanisamy/multiple-object-tracking-lidar:Multiple-Object-Tracking-from-Point-Cloudsv1.0.2,′′Dec.2019.[Online].Available:https://doi.org/10.5281/zenodo.3559186
+3. P.Palanisamy, “praveen-palanisamy/multiple-object-tracking-lidar:Multiple-Object-Tracking-from-Point-Cloudsv1.0.2,′′ Dec.2019.[Online]. Available:https://doi.org/10.5281/zenodo.3559186
 
 ## Citing
 If you use any piece of code from this repo or any information from the thesis, please cite:
