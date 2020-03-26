@@ -8,10 +8,16 @@ As shown below, the cars (could be more than 4) are moving around a figure 8 tra
 
 ![4 Cars Demo](https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif)
 
+Here is a demo of the system working with 4 cars. As seen on the left side of the screen, the cars are tracked as they go around the track. Added to that, the position of the cars are published in an array in order of the car id (car1_x, car1_y, car1_z, car2_x, car2_y, etc...)
+
+![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif)
+
 Although ultrasonic sensors might sound sufficient to allow the cars to not crash. The objective of this project is to provide localisation/positional data of the CAVs, which could be used for Deep Reinforcement Learning/DRL to improve efficiency of traffic flow.
 **This may sound like over-engineering. However, with positional data and AI, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars _don't need to stop_ to navigate through the junction**. This would not only tackle traffic congestion issues (costs billions of dollars around the world), but also improve energy efficiency. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
 
 Here a GIF of it working with 6 cars.
+
+![6 Cars Tracking](https://media.giphy.com/media/XDXWXwmfKUJWz9w4G0/giphy.gif)
 
 ## How to use
 _It is recommended to read the thesis to understand the functionality of each code before using it_
