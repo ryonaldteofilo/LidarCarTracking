@@ -12,10 +12,10 @@ Here is a demo of the system working with 4 cars. As seen on the left side of th
 
 ![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif)
 
-Although ultrasonic sensors might sound sufficient to allow the cars to not crash. The objective of this project is to provide localisation/positional data of the CAVs, which could be used for Deep Reinforcement Learning/DRL to improve efficiency of traffic flow.
-**This may sound like over-engineering. However, with positional data and AI, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars _don't need to stop_ to navigate through the junction**. This would not only tackle traffic congestion issues (costs billions of dollars around the world), but also improve energy efficiency. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
+Although ultrasonic sensors might sound sufficient to allow the cars to not crash. The objective of this project is to provide localisation/position data of the CAVs, which could be used for Deep Reinforcement Learning/DRL to improve efficiency of traffic flow.
+**This may sound like over-engineering. However, by combining position data and DRL, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars _don't need to stop_ to navigate through the junction**. This would not only tackle traffic congestion issues, but also improve energy efficiency. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
 
-Here a GIF of it working with 6 cars.
+Here a GIF of it with 6 cars.
 
 ![6 Cars Tracking](https://media.giphy.com/media/XDXWXwmfKUJWz9w4G0/giphy.gif)
 
@@ -27,10 +27,12 @@ _It is recommended to read the thesis to understand the functionality of each co
 1. Install ROS on your computer and create catkin workspace and add it to ROS environment (edit .bashrc file ~ tons of tutorial on the web)
 This project was done on Linux Ubuntu (Ubuntu 18.04.4 LTS) [INSTALLATION TUTORIAL HERE](http://wiki.ros.org/melodic/Installation/Ubuntu)
 2. git clone this repository to the src folder of your catkin workspace and catkin_make
-3. rosrun any of the scripts 
+3. Customise the clustering criteria and initial positions (read thesis for more information)
+4. Run scripts by rosrun lidar_car_tracking (script_name)
+4. Enjoy and be creative!
 
 ## Thesis
-A thesis was made for this project with analysis on consistency of tracking and identification. Also includes a more thorough elaboration on the whole system.
+A thesis was made for this project with analysis on consistency of tracking and identification. Also includes a more thorough elaboration on the system.
 
 Link to thesis:
 ```
