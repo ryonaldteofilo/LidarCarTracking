@@ -8,6 +8,8 @@ As shown below, the robot cars are moving around a figure 8 track with one junct
 
 ![4 Cars Demo](https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif)
 
+The cars used are SunFounder PiCars, information about these cars could be found [HERE](https://www.sunfounder.com/picar-s-kit.html). I've also created a repo on integrating the SunFounder PiCar-S into the ROS environment which could be found [HERE](https://github.com/ryonaldteofilo/Picar-S_ROSintegration).
+
 Here is a demo of the system working with 4 cars. As seen on the left side of the screen, the cars are tracked as they go around the track. Added to that, the position of the cars are published in an array in order of the car id (car1_x, car1_y, car1_z, car2_x, car2_y, etc...)
 
 ![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif)
