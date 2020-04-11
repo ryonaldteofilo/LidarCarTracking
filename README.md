@@ -12,7 +12,7 @@ The cars used are SunFounder PiCars, information about these cars could be found
 
 Here is a demo of the system working with 4 cars. As seen on the left side of the screen, the cars are tracked as they go around the track. Added to that, the position of the cars are published in an array in order of the car id (car1_x, car1_y, car1_z, car2_x, car2_y, etc...)
 
-![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif | width=48)
+![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif)
 
 Although ultrasonic sensors might sound sufficient to allow the cars to not crash. The objective of this project is to provide localisation/position data of the CAVs, which could be used for Deep Reinforcement Learning/DRL to improve efficiency of traffic flow.
 This may sound like an **over-engineered** solution. However, by combining position data and DRL, the acceleration and speed of each cars could be increased/decrease in the most efficient way where the cars **do not need to stop** to navigate through the junction. This would not only tackle _traffic congestion issues_, but also improve _energy efficiency_. The impact would be negligible with a small-scale model with only 4 cars. In a large-scale application with thousands of cars, the impact would be a lot more noticeable. 
