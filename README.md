@@ -23,7 +23,7 @@ Here a GIF of it with 6 cars.
 
 (Note: The stuttering in rviz is due to occasional packet losses as the point cloud data from the 2 LIDAR sensors are being streamed wirelessly using a Raspberry Pi)
 
-**more information to come**
+(more information to come...)
 
 ## How to use
 _It is recommended to read the thesis to understand the functionality of each code before using it_
