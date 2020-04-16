@@ -2,7 +2,7 @@
 Localisation Techniques for fleets of Connected Autonomous Vehicles - point cloud object tracking using OpenCV, PCL and ROS
 
 ## Information
-This project aims to create a robust system to track and identify cars/object. It is made to provide positional data of **Connected Autonomous Vehicles/CAVs** (modeled by Raspberry-Pi cars made by SunFounder) to enable traffic flow management using Artificial Intelligence.
+This project aims to create a robust system to track and identify cars/object. It is made to provide positional data of **Connected Autonomous Vehicles/CAVs** (modelled by Raspberry-Pi cars made by SunFounder) to enable traffic flow management using Artificial Intelligence.
 
 As shown below, the robot cars are moving around a figure 8 track with one junction to navigate through. Using LIDAR data and ultrasonic sensors, the cars are able to navigate through junction without crashing.
 
@@ -22,6 +22,8 @@ Here a GIF of it with 6 cars.
 ![6 Cars Tracking](https://media.giphy.com/media/XDXWXwmfKUJWz9w4G0/giphy.gif)
 
 (Note: The stuttering in rviz is due to occasional packet losses as the point cloud data from the 2 LIDAR sensors are being streamed wirelessly using a Raspberry Pi)
+
+**more information to come**
 
 ## How to use
 _It is recommended to read the thesis to understand the functionality of each code before using it_
