@@ -1,5 +1,5 @@
 # Localisation Techniques for fleets of Connected Autonomous Vehicles
-vehicle tracking using LIDAR data processing with OpenCV, PCL and ROS
+Vehicle tracking using LIDAR data processing with OpenCV, PCL and ROS
 
 ## Information
 This project aims to create a robust system to track and identify cars/object. It is made to provide positional data for a fleet of **Connected Autonomous Vehicles (CAVs)** (modelled using Raspberry-Pi robot cars).
@@ -8,6 +8,6 @@ As shown below, the robot cars are moving around a figure 8 track with one junct
 
 ![4 Cars Demo](https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif)
 
-The robot car used in this project is the SunFounder PiCar-S
+The robot car used in this project is the SunFounder PiCar-S. Here is a gif of the program in action.
 
 ![4 Cars Tracking](https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif)
