@@ -34,21 +34,21 @@ bool first_frame=true;
 bool second_frame=true;
 
 
-// Function to calculate euclidian distance between two points
+// Function to calculate euclidean distance between two points
 float euclidean_distance(const geometry_msgs::Point &p1, const geometry_msgs::Point &p2)
 {
   return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) + (p1.z - p2.z) * (p1.z - p2.z));
 }
 
-// Function to find index of matrix element with the smallest/ minimum value
+// Function to find index of the smallest element in a matrix
 std::pair<int,int> find_index_of_min(std::vector<std::vector<float>> input_dist_mat)
 {
   std::pair<int,int>min_index;
   float min_element{std::numeric_limits<float>::max()};
 
-  for (int i=0; i<input_dist_mat.size();i++) // iterate through outer vector
+  for (int i=0; i<input_dist_mat.size();i++) //rows
     {
-      for(int j=0;j<input_dist_mat.at(0).size();j++) // iterate through inner vector
+      for(int j=0;j<input_dist_mat.at(0).size();j++) //columns
         {
           if(input_dist_mat[i][j]<min_element)
             {
@@ -60,26 +60,26 @@ std::pair<int,int> find_index_of_min(std::vector<std::vector<float>> input_dist_
   return min_index;
 }
 
-
+// Function to predict next state, correct and update the Kalman Filter
 void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, const int &input_nokf)
 {
   std::vector<geometry_msgs::Point> kf_predictions{};
 
-  // if second frame, we're only setting the initial predicted state and update kf_predictions
+  // For second frame, set initial state as the predicted state
   if(second_frame)
   {
     for(int i=0; i<input_nokf; i++)
     {
       geometry_msgs::Point pt;
       pt.x=kf_vector[i].statePre.at<float>(0);
-      pt.y=kf_vector[i].statePre.at<float>(0);
+      pt.y=kf_vector[i].statePre.at<float>(1);
       pt.z=0.0f;
       kf_predictions.push_back(pt);
     }
     second_frame=false;
   }
 
-  // after second frame, predict each Kalman Filter and update kf_predictions
+  // After second frame, predict the next states using the Kalman Filter
   else
   {
     std::vector<cv::Mat> pred{};
@@ -98,30 +98,31 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
     }
   }
 
-  for(int i=0; i<input_nokf; i++) // debugging purposes
+  // for debugging only
+  for(int i=0; i<input_nokf; i++)
   {
     std::cout << "kf pred: " << kf_predictions[i].x <<" "
               << kf_predictions[i].y<<" "<< kf_predictions[i].z << std::endl;
   }
 
-  // Create markers using kf_predictions positions
+  // Create markers for visualisation
   visualization_msgs::MarkerArray cluster_markers{};
   for(int i=0; i<input_nokf; i++)
   {
     visualization_msgs::Marker m;
     m.id=i;
     m.type=visualization_msgs::Marker::SPHERE;
-    m.header.frame_id="/laser1"; //as pointcloud data is projected/concatenated on frame laser1
+    m.header.frame_id="/laser1"; // point cloud is concatenated with frame /laser1 as a reference point
     m.scale.x=0.1;
     m.scale.y=0.1;
     m.scale.z=0.1;
     m.action=visualization_msgs::Marker::ADD;
-    m.color.a=1.0;
-    m.color.r=i%2?1:0;
+    m.color.a=1.0; //opacity
+    m.color.r=i%2?1:0; // to generate random colors
     m.color.g=i%3?1:0;
     m.color.b=i%4?1:0;
 
-    geometry_msgs::Point current_cluster(kf_predictions[i]);
+    geometry_msgs::Point current_cluster(kf_predictions[i]); // create markers on the predicted states
     m.pose.position.x=current_cluster.x;
     m.pose.position.y=current_cluster.y;
     m.pose.position.z=current_cluster.z;
@@ -132,10 +133,9 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
 
     cluster_markers.markers.push_back(m);
   }
-
   marker_pub.publish(cluster_markers);
 
-  // Publish predicted positions of the car in order of picar 1 onwards
+  // Publish predicted coordinates in an array; increasing order (car1, car2, ...)
   std_msgs::Float32MultiArray picar_cc;
   for(int i=0; i<input_nokf; i++)
   {
@@ -145,9 +145,11 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
   }
   pub_cc.publish(picar_cc);
 
-  // kf_id contains information on which kf_prediction belong to a certain input_cc
+  // kf_id contains information on which element of kf_prediction belong to a particular input cluster centroid
   kf_id.clear();
   kf_id.resize(input_nokf);
+
+  // creating distance matrix as described in the thesis
   std::vector<std::vector<float>> dist_mat;
 
   for(int i=0; i<input_nokf; i++)
@@ -160,11 +162,12 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
     dist_mat.push_back(dist_vec);
   }
 
+  // finding corresponding corresponding cluster center for each predicted state for correction phase
   for(int i=0; i<input_nokf; i++)
   {
     std::pair<int,int> min_index(find_index_of_min(dist_mat));
     kf_id[min_index.first]=min_index.second;
-    dist_mat[min_index.first]=std::vector<float>(input_nokf,100000.0);
+    dist_mat[min_index.first]=std::vector<float>(input_nokf,100000.0); // set to 100000 to prevent repeated element
 
     for(int row=0;row<input_nokf;row++)
     {
@@ -172,6 +175,7 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
     }
   }
 
+  // create measurement matrix
   std::vector<cv::Mat> measure_matrices{};
   for(int i=0; i<input_nokf; i++)
   {
@@ -183,6 +187,7 @@ void predict_and_correct(const std::vector<geometry_msgs::Point> &input_cc, cons
     measure_matrices.push_back(measure_mat);
   }
 
+  // correct predicted state using measurement matrix
   std::vector<cv::Mat> correct{};
   for(int i=0; i<input_nokf; i++)
   {
@@ -225,6 +230,7 @@ void object_id(const std::vector<geometry_msgs::Point> &input_cc, const int &inp
     dist_mat.push_back(dist_vec);
   }
 
+  // similar distance method as referenced in thesis
   for(int i=0; i<dist_mat.size(); i++)
   {
     std::pair<int,int> min_index(find_index_of_min(dist_mat));
@@ -326,12 +332,14 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
     float R_value=0.08;
     float H_value=1.0;
 
+    // create an array of Kalman Filters
     for(int i=0; i<number_of_clusters; i++)
     {
       cv::KalmanFilter kf(state_d,measure_d,ctrl_d,CV_32F);
       kf_vector.push_back(kf);
     }
 
+    // provide initial state and other matrices
     for(int i=0; i<number_of_clusters; i++)
     {
       kf_vector[i].transitionMatrix = (cv::Mat_<float>(4,4) << Ax,0,1,0, 0,Ay,0,1, 0,0,Av_x,0, 0,0,0,Av_y);
@@ -350,15 +358,16 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
                 << kf_vector[i].statePre.at<float>(1) << std::endl;
     }
 
-    // Identifying cars based on initial position
     object_id(cluster_centers, number_of_clusters);
 
+    // for debugging
     std::cout << "obj_id: " << std::endl;
     for(auto it=obj_id.begin(); it!=obj_id.end(); it++)
     {
       std::cout << *it << std::endl;
     }
 
+    // for debugging
     std::cout << "car_id: " << std::endl; // cross check with obj_id
     for(auto it=car_id.begin(); it!=car_id.end(); it++)
     {
@@ -389,12 +398,12 @@ void cloud_cb (const sensor_msgs::PointCloud2ConstPtr &input)
       predict_and_correct(cluster_centers, number_of_kf);
     }
 
+    // discard frames that have different number of detected clusters
     else {std::cout<< "Not updating" <<std::endl;}
   }
 }
 
 
-// ROS node to publish and subscribe to topics
 int main(int argc, char** argv)
 {
   ros::init (argc,argv,"tracker");

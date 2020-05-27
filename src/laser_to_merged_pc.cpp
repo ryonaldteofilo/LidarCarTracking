@@ -18,22 +18,22 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_cloud3 (new pcl::PointCloud<pcl::PointXY
 
 void scanCallback1 (const sensor_msgs::LaserScan::ConstPtr& scan_in)
 {
-  projector1.projectLaser(*scan_in, *cloud1);
+  projector1.projectLaser(*scan_in, *cloud1); // convert laserscan into point cloud form
 }
 
 void scanCallback2 (const sensor_msgs::LaserScan::ConstPtr& scan_in)
 {
   sensor_msgs::PointCloud2 cloud2;
-  projector1.projectLaser(*scan_in, cloud2);
-  pcl::fromROSMsg(*cloud1, *pcl_cloud1);
+  projector1.projectLaser(*scan_in, cloud2); // convert laserscan into point cloud form
+  pcl::fromROSMsg(*cloud1, *pcl_cloud1); // convert ROS message into PCL data type
   pcl::fromROSMsg(cloud2, *pcl_cloud2);
   for (std::size_t i = 0; i < (*pcl_cloud2).points.size (); ++i)
     {
-      (*pcl_cloud2).points[i].y += 1.28;  //offset between lidars
+      (*pcl_cloud2).points[i].y += 1.28;  //add 1.28m to the y-coordinate of points from lidar2
     }
   *pcl_cloud3  = *pcl_cloud1;
-  *pcl_cloud3  += *pcl_cloud2;
-  pcl::toROSMsg (*pcl_cloud3 , *cloud3);
+  *pcl_cloud3  += *pcl_cloud2; // concatenate point clouds
+  pcl::toROSMsg (*pcl_cloud3 , *cloud3); //convert back to ROS message type
   pc_pub1.publish(*cloud3);
 }
 

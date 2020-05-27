@@ -25,9 +25,9 @@ void callback(const std_msgs::Float32MultiArray::ConstPtr &cc)
   std_msgs::Int32MultiArray car_flags;
   for(auto it=picar_pos.begin(); it!=picar_pos.end(); it++)
   {
-    if((*it).x >= -0.40 && (*it).x <= 0.40 && (*it).y >= 0.25 && (*it).y <= 1.05)
+    if((*it).x >= -0.40 && (*it).x <= 0.40 && (*it).y >= 0.25 && (*it).y <= 1.05) // zone X
     {
-      car_flags.data.push_back(1);
+      car_flags.data.push_back(1); // produce '1' if vehicle is inside zone X
     }
     else
     {
@@ -35,6 +35,7 @@ void callback(const std_msgs::Float32MultiArray::ConstPtr &cc)
     }
   }
 
+  // for debugging
   std::cout << "car_flags: " << endl;
   for(auto it=car_flags.data.begin(); it!=car_flags.data.end(); it++)
   {
