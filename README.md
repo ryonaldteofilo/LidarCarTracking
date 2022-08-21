@@ -8,6 +8,6 @@ As shown below, using LIDAR data, the robot cars are able to navigate through ju
 
 ## Demo
 <p float="left">
-<img src="https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif" width="400"/>
+<img src="https://media.giphy.com/media/fsJx47EhhA4HDu85lc/giphy.gif" width="200"/>
 <img src="https://media.giphy.com/media/XZ0kGoPJTgm52Y4oTR/giphy.gif" width="400"/>
 </p>
