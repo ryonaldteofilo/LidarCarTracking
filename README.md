@@ -2,8 +2,6 @@
 Vehicle tracking using 2D point cloud data using with OpenCV and PCL (Point Cloud Library) integrated to ROS to control robot cars. <br />
 <br />
 This project aims to create a robust system to track and identify cars or objects. <br />
-<br />
-
 ## Demo
 https://www.youtube.com/watch?v=SQBUlW-P2Fw
 
