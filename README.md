@@ -3,7 +3,6 @@ Vehicle tracking using 2D point cloud data using with OpenCV and PCL (Point Clou
 <br />
 This project aims to create a robust system to track and identify cars or objects. <br />
 <br />
-As shown below, using LIDAR data, the robot cars are able to navigate through junction without crashing.
 
 ## Demo
 https://www.youtube.com/watch?v=SQBUlW-P2Fw
