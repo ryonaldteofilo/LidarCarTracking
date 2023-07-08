@@ -1,5 +1,5 @@
 <launch>
-  <!-- tf publishers for both lidar scan topics --> 	
+  <!-- tf publishers for both lidar scan topics, offsetted from the centre --> 	
   <node pkg="tf" type="static_transform_publisher" name="lidar1_tf_broadcaster"
       args="0.0 -0.64 0.0 0.0 0.0 0.0 1.0 map laser1 100" />
   <node pkg="tf" type="static_transform_publisher" name="lidar2_tf_broadcaster"

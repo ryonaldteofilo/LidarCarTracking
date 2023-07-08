@@ -1,3 +1,4 @@
+# Filter point cloud result to ignore anything outside of the track
 scan_filter_chain:
 - name: range
   type: laser_filters/LaserScanRangeFilter
@@ -5,4 +6,3 @@ scan_filter_chain:
     use_message_range_limits: false
     lower_threshold: 0.32
     upper_threshold: 0.85
-
