@@ -1,15 +1,15 @@
-#include <ros/ros.h>
-#include <iostream>
-#include <vector>
-#include <string>
+#include "common.h"
+
+// ROS
 #include <std_msgs/String.h>
 #include <geometry_msgs/Point.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <std_msgs/Int32MultiArray.h>
-using namespace std;
 
+// ROS publisher
 ros::Publisher picarflag_pub;
 
+// Subscriber callback
 void callback(const std_msgs::Float32MultiArray::ConstPtr &cc)
 {
   std::vector<geometry_msgs::Point> picar_pos;

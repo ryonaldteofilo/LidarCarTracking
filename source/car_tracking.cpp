@@ -1,17 +1,18 @@
-#include <iostream>
-#include <string>
-#include <iterator>
-#include <limits>
-#include <algorithm>
-#include <utility>
-#include <vector>
+#include "common.h"
+
+// OpenCV 
 #include <opencv2/core/core.hpp>
 #include <opencv2/video/video.hpp>
 #include <opencv2/video/tracking.hpp>
-#include <ros/ros.h>
+
+// ROS
 #include <std_msgs/Float32MultiArray.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <geometry_msgs/Point.h>
+#include <visualization_msgs/MarkerArray.h>
+#include <visualization_msgs/Marker.h>
+
+// PCL
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl_ros/point_cloud.h>
@@ -21,8 +22,6 @@
 #include <pcl/common/geometry.h>
 #include <pcl/kdtree/kdtree.h>
 #include <pcl/segmentation/extract_clusters.h>
-#include <visualization_msgs/MarkerArray.h>
-#include <visualization_msgs/Marker.h>
 
 std::vector<cv::KalmanFilter> kf_vector{};
 std::vector<int> car_id{};
@@ -32,7 +31,6 @@ ros::Publisher pub_cc;
 ros::Publisher marker_pub;
 bool first_frame=true;
 bool second_frame=true;
-
 
 // Function to calculate euclidean distance between two points
 float euclidean_distance(const geometry_msgs::Point &p1, const geometry_msgs::Point &p2)

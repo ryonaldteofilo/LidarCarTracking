@@ -1,9 +1,12 @@
-#include <iterator>
-#include <ros/ros.h>
+#include "common.h"
+
+// ROS
 #include <std_msgs/String.h>
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <laser_geometry/laser_geometry.h>
+
+// PCL
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
